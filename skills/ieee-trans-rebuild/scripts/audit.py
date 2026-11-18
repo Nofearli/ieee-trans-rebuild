@@ -113,16 +113,27 @@ def check_folder(root, folder, exempt):
         with zipfile.ZipFile(zips[0]) as z:
             names = z.namelist()
             have_tex = any(n.endswith("main.tex") for n in names)
-            have_cls = any(n.endswith("IEEEtran.cls") for n in names)
+            # xelatex/ctex projects (magic comment) carry no IEEEtran.cls
+            xelatex_mode = False
+            if have_tex:
+                for n in names:
+                    if n.endswith("main.tex"):
+                        head = z.read(n)[:300].decode("utf8", "replace").lower()
+                        xelatex_mode = ("!tex program = xelatex" in head
+                                        or "ctexart" in head)
+                        break
+            have_cls = (any(n.endswith("IEEEtran.cls") for n in names)
+                        or xelatex_mode)
             nfig = sum(1 for n in names if n.startswith("figures/")
-                       and n.endswith(".pdf"))
-            r["zip_info"] = f"tex:{have_tex} cls:{have_cls} figs:{nfig}"
+                       and (n.endswith(".pdf") or n.endswith(".png")))
+            r["zip_info"] = (f"tex:{have_tex} cls:{have_cls} figs:{nfig}"
+                             + (" xelatex" if xelatex_mode else ""))
             if not have_tex:
                 r["issues"].append("zip lacks main.tex")
             if not have_cls:
                 r["issues"].append("zip lacks IEEEtran.cls")
             if nfig == 0:
-                r["issues"].append("zip lacks figure pdfs")
+                r["issues"].append("zip lacks figures")
     else:
         r["issues"].append("zip missing")
 

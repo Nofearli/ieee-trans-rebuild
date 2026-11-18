@@ -3,25 +3,26 @@ name: ieee-trans-rebuild
 description: 把论文 PDF 逐页复刻重建为可编译的 IEEEtran LaTeX 工程（main.tex + 分节 sec_*.tex + 矢量图表 + 逐页对比图 + Overleaf zip），公式手写并高倍核验，IEEEtran.cls 内置。Use when the user asks PDF 转 LaTeX、论文重建、复刻 IEEE 排版、论文转 tex、把论文做成 Overleaf 工程、重建论文工程、PDF2LaTeX、ieee-trans-rebuild.
 metadata:
   author: Nofearli
-  version: "1.0.0"
-  argument-hint: <pdf-path> [工作区目录]
+  version: "1.1.0"
+  argument-hint: <pdf-or-png-path> [工作区目录]
 ---
 
 # ieee-trans-rebuild · 论文 PDF → IEEE LaTeX 全流程复刻
 
-输入一篇论文 PDF，产出一个与原版逐页对齐、可直接上传 Overleaf 编译的 LaTeX 工程。
-流程与验收标准来自 13 篇 IEEE 期刊稿（TAC/TAES/TCST/TCYB/TMech/TSMC/TNNLS/T-ASE/T-ITS + Elsevier 重排）的实战重建，审计 13/13 通过。
+输入一篇论文 PDF（或长截图 PNG），产出一个与原版逐页对齐、可直接上传 Overleaf 编译的 LaTeX 工程。
+流程与验收标准来自 13 篇 IEEE 期刊稿（TAC/TAES/TCST/TCYB/TMech/TSMC/TNNLS/T-ASE/T-ITS + Elsevier 重排）与第二批 4 篇（IECON 会议稿 journal 重排、Automatica 重排、TCYB early access 逐页对齐、微信长截图 ctexart 转录）的实战重建，审计全部通过。
 
 **第一次调用先读** `references/01-workflow.md`（端到端流程与常量），细节按需再查：
 
 | 文件 | 内容 |
 |---|---|
-| references/01-workflow.md | 8 阶段流水线 + 关键常量速查 |
+| references/01-workflow.md | 8 阶段流水线 + 关键常量速查 + 输入形态分支 |
 | references/02-tex-conventions.md | 版面复刻（twoside、横幅水印、算法框、浮动控制） |
 | references/03-formula-transcription.md | 公式手写 + zoom 高倍核验法（质量核心） |
 | references/04-figure-extraction.md | 图表矢量裁剪与手工修正 |
 | references/05-metadata-and-skills.md | 元数据核实链 + mineru/zotero/personal-sci-writing 集成 |
 | references/06-acceptance.md | 审计七项 + 可接受/不可接受差异 |
+| references/07-long-screenshot.md | 非PDF输入：长截图切页管线 + ctexart 中文转录 + audit xelatex 兼容 |
 
 ## 主工作流（单篇默认；多篇按篇滚动 + 最后汇总 REPORT）
 

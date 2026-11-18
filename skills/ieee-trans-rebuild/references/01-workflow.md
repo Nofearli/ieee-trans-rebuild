@@ -1,7 +1,13 @@
 # 01 · 端到端工作流（单篇论文 → 完整 LaTeX 工程）
 
-输入：一篇论文 PDF（通常 IEEE 两栏期刊稿；Elsevier pre-proof 等非 IEEE 稿走第 5 阶段豁免分支）。
+输入：一篇论文 PDF（通常 IEEE 两栏期刊稿；非 IEEE 稿的处理见下）。
 输出：`converted/<NN>_<短名>/` 下的完整工程 + 逐页对比 + Overleaf zip。
+
+**输入形态分支**：
+- IEEE 会议稿（如 IECON）：用户可能要求统一 journal 版式重排（先问清）——重排时会议平台元素（版权侧栏）不复刻，页数豁免，内容完整为准。
+- Elsevier 等非 IEEE 稿：IEEEtran 重排、页数豁免（见 references/02 与 06）。
+- **长截图（PNG）等非 PDF 输入**：走 references/07-long-screenshot.md 的切页管线，中文文档用 ctexart+xelatex（audit 按魔法注释自动兼容）。
+- 重复审稿副本：跳过，在 REPORT.md 注明。
 
 ## 阶段 0 · 预检与环境
 
