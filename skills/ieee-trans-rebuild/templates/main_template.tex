@@ -1,0 +1,82 @@
+% ======================================================================
+% IEEEtran 重建工程主文件骨架（按原版逐项修改后使用）
+% 标准两栏 IEEE 期刊稿：\documentclass[journal]{IEEEtran}
+% 早期访问(accepted article/Xplore)稿：\documentclass[journal,twoside]{IEEEtran}
+%   （IEEEtran journal 默认 oneside；早期访问版原版奇偶页 running head 镜像，必须 twoside）
+% 编译：pdflatex main.tex && pdflatex main.tex   （无 bibtex，文献用 thebibliography）
+% ======================================================================
+\documentclass[journal]{IEEEtran}
+% \documentclass[journal,twoside]{IEEEtran}   % <-- 早期访问版用这一行
+
+\usepackage{amsmath,amssymb,amsfonts}   % 全部 13 篇必备
+\usepackage{graphicx}                   % 全部 13 篇必备
+\usepackage{cite}                       % 全部 13 篇必备
+\usepackage{booktabs}                   % 原版有三线表时
+\usepackage{bm}                         % 原版用粗体数学符号时
+\usepackage{array}                      % 复杂表格列格式
+\usepackage{multirow}                   % 合并单元格表格
+\usepackage{amsthm}                     % 定理环境（配合下方自定义样式）
+\usepackage{url}
+\usepackage{enumitem}
+\usepackage{float}
+% \usepackage{algorithm,algorithmic}    % 仅当原版用标准 algorithm 浮动；伪代码框一般用 ruled minipage 复刻，见 references/02
+% \usepackage{eso-pic,atbegshi}         % 仅早期访问版复刻 Xplore 页脚水印时
+
+\graphicspath{{figures/}}
+
+% ---- 定理环境（按原版样式微调；IEEE 常见为小型大写标题+正体正文）----
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}{Lemma}
+% \newtheorem{assumption}{Assumption}
+% \newtheorem{definition}{Definition}
+% \newtheorem{proposition}{Proposition}
+% \newtheorem{remark}{Remark}
+
+% ---- 版面复刻区（仅当逐页对齐需要时启用，取值从原版测量）----
+% \setlength{\textwidth}{...pt} 等——见 references/02-tex-conventions.md 第 3 节
+
+\begin{document}
+
+\title{<Full Paper Title>}
+% 标题与原版逐字符一致（含大小写、连字符）
+
+\author{<First Author>,~\IEEEmembership{<Member,~IEEE,} et al.>% <- 作者块与原版一致
+\thanks{Manuscript received ...; This work was supported by ...}% <- 原版首页脚注逐字照抄
+\thanks{The authors are with ... (e-mail: ...)}%
+% 早期访问版首页无作者名时：保留占位 \author{Authors\ TBD} 并在上方加 TODO 注释记录已核查渠道（不编造）
+}
+
+\markboth{IEEE Transactions on <Name>}{}% <- 页眉期刊名，早期访问版常有特殊 running head，按原版复刻
+
+\maketitle
+
+\begin{abstract}
+<Abstract，逐字照抄原版>
+\end{abstract}
+
+\begin{IEEEkeywords}
+<Index Terms，逐字照抄>
+\end{IEEEkeywords}
+
+\section{Introduction}
+\label{sec:intro}
+\input{sec_intro}
+
+% 按原版分节逐个 \input：sec_problem / sec_prelim / sec_main / sec_simulation / sec_conclusion ...
+\input{sec_conclusion}
+
+% ---- 致谢/附录（按原版有无）----
+% \section*{Acknowledgment}
+% \appendix[Proof of ...]
+
+% ---- 参考文献：thebibliography 逐条照抄，编号与原版一一对应 ----
+% 条目多时拆到 refs.tex 再 \input{refs}
+\begin{thebibliography}{00}
+\bibitem{ref1} A.~Author and B.~Author, ``Article title,'' \emph{Journal}, vol.~X, no.~Y, pp.~1--10, 2024.
+% \IEEEtriggeratref{N}   % <- 末页参考文献两栏平衡：N = 触发换栏的文献序号，见 references/02
+\end{thebibliography}
+
+% ---- 作者照片+简历（原版有 bio 时；照片从原版矢量裁剪，见 references/04）----
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bio1.pdf}}]{Name}...\end{IEEEbiography}
+
+\end{document}
